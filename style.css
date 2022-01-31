@@ -1,0 +1,394 @@
+@media screen and (min-width: 0px) {
+  #delayInput {
+    width: 40px;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  #delayInput {
+    width: 80px;
+  }
+}
+
+label {
+  color: #63637b;
+  user-select: none;
+}
+
+img {
+  filter: invert(46%) sepia(8%) saturate(1062%) hue-rotate(210deg)
+    brightness(82%) contrast(84%);
+}
+
+input[type="checkbox"]:disabled {
+  filter: hue-rotate(25deg);
+  cursor: pointer;
+}
+
+ul {
+  list-style: inside;
+  color: #202020;
+}
+
+li {
+  color: #202020;
+  margin-left: -10px;
+  padding-top: 5px;
+  list-style-position: outside;
+}
+
+input[type="button"] {
+  border-radius: 5px 5px 5px 5px;
+  border: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  background-image: url("https://cdn.glitch.me/cc7980bc-6980-45da-a79b-3fbfdb89c67b%2Fcancel-svgrepo-com.svg?v=1637610193117");
+}
+
+input.delay_placeholder:-webkit-input-placeholder {
+  color: white;
+}
+
+input.delay_placeholder::-webkit-input-placeholder {
+  color: white;
+}
+
+.row {
+  margin-top: 0px !important;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+
+.tooltip-inner::before {
+  background-color: #2a2832;
+}
+
+.tooltip-inner {
+  background-color: #2a2832 !important;
+
+  color: #f4f4fa !important;
+  white-space: pre-wrap;
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: #2a2832;
+}
+
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: #2a2832;
+}
+
+.tooltip.bs-tooltip-start .tooltip-arrow::before {
+  border-left-color: #2a2832;
+}
+
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+  border-right-color: #2a2832;
+}
+
+.ui-tooltip {
+  white-space: pre-line;
+}
+
+.ui-tooltip-content {
+  white-space: pre-line;
+}
+
+.placeholder {
+  color: #aaaabb;
+}
+
+.placeholder-ul {
+  color: #aaaabb;
+}
+
+.placeholder-li {
+  color: #aaaabb;
+}
+
+.modal-title {
+  font-size: 18px;
+}
+
+.key {
+  padding: 1px 3px;
+  color: gray;
+  font-size: 14px;
+  font-weight: bold;
+  border: solid 1px gray;
+  border-radius: 5px;
+}
+
+.modal-dialog {
+  top: -10px;
+}
+
+.video_radiant:after {
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(255, 255, 255, 0) 35%
+  );
+}
+
+#viewCont {
+  display: none;
+}
+
+#linkInput {
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+#ok {
+  color: #897f7f;
+  display: none;
+  padding: 6px 5px 6px 5px;
+  text-align: center;
+  border-radius: 5px;
+  top: 70%;
+  border: none;
+  outline: none;
+  left: 45%;
+  right: 45%;
+  width: 10%;
+  position: fixed;
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+#takeNote {
+  color: #63637b;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 5px;
+  display: flex;
+  user-select: none;
+}
+
+#takeNote:hover {
+  background: #f4f4fa;
+}
+
+#noteInput {
+  position: relative;
+  top: 55px;
+  display: none;
+  text-align: center;
+  background: #f4f4fa;
+  color: black;
+  padding: 3px 6px;
+  width: 65%;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+#note {
+  width: 100%;
+  color: black;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#delayed {
+  position: relative;
+  display: flex;
+  user-select: none;
+}
+
+#delayInput {
+  left: 5px;
+  position: relative;
+  text-align: center;
+  background: #f4f4fa;
+  color: #63637b;
+  padding: 3px 6px;
+  width: 80px;
+  border: none;
+  border-radius: 5px;
+}
+
+#refresh {
+  color: #63637b;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 5px;
+  display: flex;
+  user-select: none;
+}
+
+#refresh:hover {
+  background: #f4f4fa;
+}
+
+#keyboard_container {
+  user-select: none;
+  outline: none;
+  display: flex;
+}
+
+#keyboard {
+  position: relative;
+  height: 18px;
+  width: 18px;
+  background-color: #f4f4fa;
+  border-radius: 50%;
+  display: inline;
+}
+
+#line {
+  position: relative;
+  width: 100%;
+}
+
+.chapter {
+  position: fixed;
+  height: 40px;
+  cursor: pointer;
+}
+
+#play_pointer {
+  background: #586cf4;
+  position: fixed;
+  height: 40px;
+  left: 25px;
+  width: 5px;
+  z-index: 2;
+  color: #63637b;
+}
+
+#commands {
+  position: relative;
+  top: 40px;
+  width: 65%;
+  user-select: none;
+}
+
+#left {
+  position: fixed !important;
+}
+
+#right {
+  position: absolute;
+  left: 64%;
+  width: 36%;
+  z-index: 2;
+}
+
+#shortcuts {
+  color: #63637b;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 5px;
+  display: flex;
+  user-select: none;
+}
+
+#shortcuts:hover {
+  background: #f4f4fa;
+}
+
+#video_container {
+  position: relative;
+  width: 61%;
+  user-select: none;
+}
+
+#video_player {
+  border-radius: 5px;
+  position: relative;
+  background: #000000;
+}
+
+#video_container::after {
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 99%;
+  content: "";
+}
+
+#video_control {
+  position: fixed;
+  top: 400px;
+  left: 25px;
+  width: 61%;
+  z-index: 3;
+}
+
+#bar_container {
+  height: 5px;
+  background: #a7abbd9e;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#bar_duration {
+  background: #586cf4;
+  transition: none;
+  z-index: 4;
+  height: 5px;
+}
+
+#bar_time,
+#small_bar_time {
+  font-size: 16px;
+  color: white;
+}
+
+#bar_chapter {
+  font-size: 16px;
+  color: white;
+  left: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#sound_range {
+  position: relative;
+  width: 70px;
+  top: 10px;
+}
+
+#video_play {
+  visibility: hidden;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 6;
+  border-radius: 50%;
+  border-color: white;
+  background-position: center;
+  background-size: 100px 100px;
+  background-image: url(https://cdn.glitch.global/18600a1d-7980-41f9-b995-164f834d4937/play-color-svgrepo-com.svg?v=1643318572418);
+}
+
+#tooltip_time {
+  position: absolute;
+  color: white;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+#video_player_thumb {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+}
