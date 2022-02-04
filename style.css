@@ -332,7 +332,6 @@ input.delay_placeholder::-webkit-input-placeholder {
 #video_control {
   visibility: hidden;
   position: fixed;
-  top: 400px;
   left: 25px;
   width: 61%;
   z-index: 3;

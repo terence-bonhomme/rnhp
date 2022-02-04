@@ -1766,6 +1766,8 @@ $("#html").hide();
     // make the video
     player.width = window.innerWidth * (parameters.get("width") / 100) - 20;
     player.height = clientHeight - 100 - w_parameter;
+    
+    $("#video_control").css("top", player.height - 50 + "px")
 
     player_thumb.width = 160;
     player_thumb.height = 100;
