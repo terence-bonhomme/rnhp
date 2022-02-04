@@ -1,5 +1,15 @@
 "use strict";
 
+import {
+  updateSoundMuteIcon,
+  updatePlayPauseIcon,
+  hideVideoControl,
+  showVideoControl,
+} from "./modules/player.js";
+export { player };
+
+var player;
+
 $("#html").hide();
 
 (async () => {
@@ -35,7 +45,7 @@ $("#html").hide();
 
   const clientHeight = document.getElementById("html").clientHeight;
 
-  var player = document.getElementById("video_player");
+  player = document.getElementById("video_player");
   var player_thumb = document.getElementById("video_player_thumb");
 
   var delay = 0;
@@ -437,7 +447,6 @@ $("#html").hide();
 
   ok.onclick = async function () {
     url = linkInput.value;
-    console.log(url);
 
     let new_video_url;
     if (url.includes("dropbox.com")) {
@@ -581,12 +590,19 @@ $("#html").hide();
       show_shortcuts();
     });
 
+  player.onvolumechange = function () {
+    if (!player.muted) $("#volume").slider("value", player.volume * 100);
+    updateSoundMuteIcon();
+  };
+
   // player control
 
   $("#video_container").on("mouseleave", function () {
+    $("#video_player_thumb").css("opacity", 0);
+    $("#tooltip_time").css("opacity", 0);
+
     if (!player.paused && cursor_hover_video) {
       cursor_hover_video = false;
-      console.log("out video container");
       hideVideoControl();
     }
   });
@@ -607,8 +623,7 @@ $("#html").hide();
 
   $("#video_container").mousemove(function (event) {
     const mouse_x =
-      (event.pageX - $("#video_container").offset().left - 14) /
-      /*$("#video_container").width() - 24*/ (player.width - 25);
+      (event.pageX - $("#video_container").offset().left - 14) / (player.width - 25);
     const mouse_y =
       (event.pageY - $(this).offset().top) / $("#video_container").height();
 
@@ -627,11 +642,24 @@ $("#html").hide();
       clearTimeout(pointer_timeout);
       document.getElementById("video_container").style.cursor = "pointer";
 
-      // update thumbmail
+      // update tooltip timer
+
+      if (event.pageX <= 40) {
+        document.getElementById("tooltip_time").style.left = 5 + "px";
+      } else if (event.pageX > $("#video_container").width() - 10) {
+        document.getElementById("tooltip_time").style.left =
+          $("#video_container").width() - $("#tooltip_time").width() - 4 + "px";
+      } else {
+        document.getElementById("tooltip_time").style.left =
+          event.pageX - $("#tooltip_time").width() / 2 - 10 + "px";
+      }
+
+      // update thumbnail
 
       if ($("#video_player_thumb").css("visibility") == "hidden")
         $("#video_player_thumb").css("visibility", "visible");
 
+      // thumbnail
       if (event.pageX <= 125) {
         document.getElementById("video_player_thumb").style.left = 20 + "px";
       } else if (event.pageX > $("#video_container").width() - 90) {
@@ -695,7 +723,14 @@ $("#html").hide();
     if (mouse_y >= 0.85 && mouse_y <= 0.92)
       player.currentTime = Math.floor(mouse_x * player.duration);
 
-    if (mouse_y < 0.85) player.paused ? player.play() : player.pause();
+    if (mouse_y < 0.85) {
+      if (player.paused) {
+        player.play();
+      } else {
+        player.pause();
+      }      
+      updatePlayPauseIcon();
+    }
 
     clearTimeout(cursor_video_timeout);
     cursor_video_timeout = setTimeout(function () {
@@ -704,6 +739,26 @@ $("#html").hide();
         cursor_hover_video = false;
       }
     }, 3000);
+  });
+
+  $("#play_icon").click(function (event) {
+    if (player.paused) {
+      player.play();
+    } else {
+      player.pause();
+    }    
+    updatePlayPauseIcon();
+  });
+
+  $("#sound_icon").click(function (event) {
+    player.muted = !player.muted;
+
+    if (player.muted) {
+      $("#volume").slider("value", 0);
+    } else {
+      $("#volume").slider("value", player.volume * 100);
+    }
+    updateSoundMuteIcon();
   });
 
   // keyboard shortcuts
@@ -787,11 +842,8 @@ $("#html").hide();
           break;
         case "mute":
           if ($("#noteInput").is(":focus") == false) {
-            if (player.muted) {
-              player.muted = false;
-            } else {
-              player.muted = true;
-            }
+            updateSoundMuteIcon();
+            player.muted = !player.muted;
           }
           break;
         case "previous chapter":
@@ -854,7 +906,6 @@ $("#html").hide();
             if (player.paused) {
               player.play();
               if (!play_fade) {
-                //  $("#video_player_thumb").css("opacity", 0);
                 $("#video_play").fadeOut("slow");
                 play_fade = true;
               }
@@ -864,6 +915,7 @@ $("#html").hide();
               player.pause();
               showVideoControl();
             }
+            updatePlayPauseIcon();
           }
           break;
         case "media play/pause":
@@ -1038,6 +1090,7 @@ $("#html").hide();
         break;
       case "cancel":
         player.play();
+        updatePlayPauseIcon();
         recoverFromNoteInput();
         break;
       default:
@@ -1105,7 +1158,7 @@ $("#html").hide();
 
         text_input = noteInput.value;
 
-        player.pause();
+        player.play();
 
         recoverFromNoteInput();
 
@@ -1189,7 +1242,7 @@ $("#html").hide();
 
         let text_input = noteInput.value;
 
-        player.pause();
+        player.play();
 
         recoverFromNoteInput();
 
@@ -1416,7 +1469,7 @@ $("#html").hide();
 
         text_input = noteInput.value;
 
-        player.pause();
+        player.play();
 
         recoverFromNoteInput();
 
@@ -1669,26 +1722,6 @@ $("#html").hide();
 
   // FUNCTIONS
 
-  function hideVideoControl() {
-    //console.log("hide")
-    $("#video_control").css("visibility", "hidden");
-    $("#video_container").removeClass("video_radiant");
-    $("#bar_container").css("visibility", "hidden");
-    document.getElementById("video_container").style.cursor = "auto";
-    document.getElementById("tooltip_time").style.opacity = 0;
-    document.getElementById("video_player_thumb").style.opacity = 0;
-  }
-
-  function showVideoControl() {
-    //console.log("show")
-    $("#video_control").css("visibility", "visible");
-    $("#video_container").addClass("video_radiant");
-    $("#bar_container").css("visibility", "visible");
-    //document.getElementById("video_container").style.cursor = "pointer";
-    document.getElementById("tooltip_time").style.opacity = 1;
-    document.getElementById("video_player_thumb").style.opacity = 1;
-  }
-
   function get_tree_depth(counter, depth, data) {
     if (counter == 0);
     else if (counter == 1) data = data.children[line_position1];
@@ -1756,7 +1789,7 @@ $("#html").hide();
     $("#video_container").width(player.width);
 
     $("#bar_container").css("width", player.width - 25 + "px");
-    $("#bar_container").css("visibility", "visible");
+    //$("#bar_container").css("visibility", "visible");
 
     $("#video_play").css("top", player.height / 2 - 50 + "px");
     $("#video_play").css("left", player.width / 2 - 37.5 + "px");
@@ -1767,6 +1800,8 @@ $("#html").hide();
         '#000000 no-repeat center/50% url("https://cdn.glitch.global/18600a1d-7980-41f9-b995-164f834d4937/headphones-color-svgrepo-com.svg?v=1643053570830);"'
       );
     }
+
+    player.volume = 0.5;
 
     player.onloadeddata = function () {
       if (enable_parameter) {
@@ -1801,14 +1836,17 @@ $("#html").hide();
         hideVideoControl();
       } else {
         player.pause();
+
         showVideoControl();
       }
+      updatePlayPauseIcon();
     };
 
     player.oncanplay = function () {
-      //console.log("can play")
       if (!video_ready) {
         $("#video_play").css("visibility", "visible");
+        $("#volume").css("visibility", "visible");
+        showVideoControl();
         video_ready = true;
       }
     };
@@ -1940,6 +1978,20 @@ $("#html").hide();
         player.playbackRate = Number(speed_parameter_value);
       }
     }
+
+    // create the volume slider
+
+    $("#volume").slider({
+      orientation: "horizontal",
+      min: 0,
+      max: 100,
+      value: 50,
+      range: "min",
+      slide: function (event, ui) {
+        player.volume = ui.value / 100;
+        updateSoundMuteIcon();
+      },
+    });
 
     // make the timeline
     timeline();
