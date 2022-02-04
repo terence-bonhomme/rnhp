@@ -136,6 +136,11 @@ input.delay_placeholder::-webkit-input-placeholder {
   );
 }
 
+.video_button {
+  filter: none;
+  cursor: pointer;
+}
+
 #viewCont {
   display: none;
 }
@@ -256,6 +261,7 @@ input.delay_placeholder::-webkit-input-placeholder {
   position: fixed;
   height: 40px;
   cursor: pointer;
+  user-select: none;
 }
 
 #play_pointer {
@@ -324,6 +330,7 @@ input.delay_placeholder::-webkit-input-placeholder {
 }
 
 #video_control {
+  visibility: hidden;
   position: fixed;
   top: 400px;
   left: 25px;
@@ -332,6 +339,7 @@ input.delay_placeholder::-webkit-input-placeholder {
 }
 
 #bar_container {
+  visibility: hidden;
   height: 5px;
   background: #a7abbd9e;
   visibility: hidden;
@@ -349,15 +357,32 @@ input.delay_placeholder::-webkit-input-placeholder {
 #small_bar_time {
   font-size: 16px;
   color: white;
+  margin-top: 10px;
 }
 
 #bar_chapter {
   font-size: 16px;
   color: white;
-  left: 50px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-top: 10px;
+}
+
+#bar_play_pause {
+  margin-top: 20px;
+}
+
+#bar_sound_mute {
+  margin-top: 20px;
+}
+
+#mute_icon {
+  display: none;
+}
+
+#pause_icon {
+  display: none;
 }
 
 #sound_range {
@@ -380,6 +405,7 @@ input.delay_placeholder::-webkit-input-placeholder {
 }
 
 #tooltip_time {
+  opacity: 0;
   position: absolute;
   color: white;
   top: 0;
@@ -391,4 +417,42 @@ input.delay_placeholder::-webkit-input-placeholder {
   position: absolute;
   opacity: 0;
   visibility: hidden;
+}
+
+#volume_audio {
+  display: "none";
+}
+
+#volume {
+  visibility: hidden;
+  margin-top: 20px;
+  position: absolute;
+  width: 70px;
+  height: 8px;
+  background: #555555;
+  border-radius: 15px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+#volume > .ui-slider-range-min {
+  height: 8px;
+  width: 70px;
+  background: #586cf4;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+#volume > .ui-slider-handle {
+  width: 15px;
+  height: 15px;
+  border-radius: 20px;
+  background: #ffffff;
+  position: absolute;
+  margin-left: -12px;
+  margin-top: -11px;
+  cursor: pointer;
+  outline: none;
 }
