@@ -623,7 +623,8 @@ $("#html").hide();
 
   $("#video_container").mousemove(function (event) {
     const mouse_x =
-      (event.pageX - $("#video_container").offset().left - 14) / (player.width - 25);
+      (event.pageX - $("#video_container").offset().left - 14) /
+      (player.width - 25);
     const mouse_y =
       (event.pageY - $(this).offset().top) / $("#video_container").height();
 
@@ -706,6 +707,18 @@ $("#html").hide();
     }, 500);
   });
 
+  $("#video_container, #video_play").mousemove(function (event) {
+    const mouse_y =
+      (event.pageY - $("#video_container").offset().top) /
+      $("#video_container").height();
+
+    if (mouse_y >= 0.85 && mouse_y <= 0.92) {
+      $("#bar_slid").css("visibility", "visible");
+    } else {
+      $("#bar_slid").css("visibility", "hidden");
+    }
+  });
+
   $("#video_container, #video_play").click(function (event) {
     const mouse_x =
       (event.pageX - $("#video_container").offset().left - 14) /
@@ -720,15 +733,20 @@ $("#html").hide();
       play_fade = true;
     }
 
-    if (mouse_y >= 0.85 && mouse_y <= 0.92)
+    if (mouse_y >= 0.85 && mouse_y <= 0.92) {
       player.currentTime = Math.floor(mouse_x * player.duration);
+      $("#bar_slid").slider(
+        "value",
+        (player.currentTime / player.duration) * 100
+      );
+    }
 
     if (mouse_y < 0.85) {
       if (player.paused) {
         player.play();
       } else {
         player.pause();
-      }      
+      }
       updatePlayPauseIcon();
     }
 
@@ -746,7 +764,7 @@ $("#html").hide();
       player.play();
     } else {
       player.pause();
-    }    
+    }
     updatePlayPauseIcon();
   });
 
@@ -1766,8 +1784,8 @@ $("#html").hide();
     // make the video
     player.width = window.innerWidth * (parameters.get("width") / 100) - 20;
     player.height = clientHeight - 100 - w_parameter;
-    
-    $("#video_control").css("top", player.height - 50 + "px")
+
+    $("#video_control").css("top", player.height - 50 + "px");
 
     player_thumb.width = 160;
     player_thumb.height = 100;
@@ -1791,6 +1809,8 @@ $("#html").hide();
     $("#video_container").width(player.width);
 
     $("#bar_container").css("width", player.width - 25 + "px");
+    $("#bar_slid").css("width", player.width - 25 - 7.5 + "px");
+
     //$("#bar_container").css("visibility", "visible");
 
     $("#video_play").css("top", player.height / 2 - 50 + "px");
@@ -1868,6 +1888,10 @@ $("#html").hide();
       $("#bar_duration").css(
         "width",
         (player.currentTime / player.duration) * 100 + "%"
+      );
+      $("#bar_slid").slider(
+        "value",
+        (player.currentTime / player.duration) * 100
       );
     }, 17);
 
@@ -1982,6 +2006,17 @@ $("#html").hide();
     }
 
     // create the volume slider
+
+    $("#bar_slid").slider({
+      orientation: "horizontal",
+      min: 0,
+      max: 100,
+      value: 0,
+      range: "min",
+      slide: function (event, ui) {
+        player.currentTime = (ui.value / 100) * player.duration;
+      },
+    });
 
     $("#volume").slider({
       orientation: "horizontal",

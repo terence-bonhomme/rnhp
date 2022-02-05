@@ -352,6 +352,40 @@ input.delay_placeholder::-webkit-input-placeholder {
   height: 5px;
 }
 
+#bar_slid {
+  visibility: hidden;
+  margin-left: 10px;
+  margin-top: 0px;
+  position: absolute;
+  height: 8px;
+  border-radius: 15px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+#bar_slid > .ui-slider-range-min {
+  visibility: hidden;
+  height: 8px;
+  width: 100%;
+  background: #586cf4;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+#bar_slid > .ui-slider-handle {
+  width: 15px;
+  height: 15px;
+  border-radius: 20px;
+  background: #586cf4;
+  position: absolute;
+  margin-left: -12px;
+  margin-top: -13px;
+  cursor: pointer;
+  outline: none;
+}
+
 #bar_time,
 #small_bar_time {
   font-size: 16px;
