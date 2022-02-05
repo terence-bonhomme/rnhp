@@ -720,6 +720,10 @@ $("#html").hide();
       $("#bar_slid").css("visibility", "hidden");
     }
   });
+  
+  $("#video_container").mouseleave(function (event) {
+    $("#bar_slid").css("visibility", "hidden");
+  });
 
   $("#video_container, #video_play").click(function (event) {
     const mouse_x =
