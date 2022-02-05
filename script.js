@@ -7,6 +7,7 @@ import {
   showVideoControl,
   muteSwitch,
 } from "./modules/player.js";
+import { RemNoteAPI } from "./RemNoteAPI-fix.js";
 export { player };
 
 var player;

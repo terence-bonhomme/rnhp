@@ -20,6 +20,8 @@
  * RemNoteAPI.v0.get_context(options);
  */
 
+export { RemNoteAPI };
+
 class RemNoteAPIV0 {
   constructor() {
     this.usedMessageIds = 0;
