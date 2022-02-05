@@ -5,6 +5,7 @@ import {
   updatePlayPauseIcon,
   hideVideoControl,
   showVideoControl,
+  muteSwitch,
 } from "./modules/player.js";
 export { player };
 
@@ -769,14 +770,7 @@ $("#html").hide();
   });
 
   $("#sound_icon").click(function (event) {
-    player.muted = !player.muted;
-
-    if (player.muted) {
-      $("#volume").slider("value", 0);
-    } else {
-      $("#volume").slider("value", player.volume * 100);
-    }
-    updateSoundMuteIcon();
+    muteSwitch();
   });
 
   // keyboard shortcuts
@@ -859,10 +853,7 @@ $("#html").hide();
           player.volume >= 0.05 ? (player.volume -= 0.05) : (player.volume = 0);
           break;
         case "mute":
-          if ($("#noteInput").is(":focus") == false) {
-            updateSoundMuteIcon();
-            player.muted = !player.muted;
-          }
+          muteSwitch();
           break;
         case "previous chapter":
           current_chapter--;

@@ -4,7 +4,18 @@ export {
   updateSoundMuteIcon,
   hideVideoControl,
   showVideoControl,
+  muteSwitch,
 };
+
+function muteSwitch() {
+  player.muted = !player.muted;
+  if (player.muted) {
+    $("#volume").slider("value", 0);
+  } else {
+    $("#volume").slider("value", player.volume * 100);
+  }
+  updateSoundMuteIcon();
+}
 
 function updatePlayPauseIcon() {
   if (player.paused) {
