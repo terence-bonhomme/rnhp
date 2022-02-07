@@ -2563,6 +2563,8 @@ $("#html").hide();
 
                             line_mouse_events(li5);
 
+                            $(li5).css("cursor", "auto");
+
                             const child5_rem = child4_rem.children[n5];
 
                             let input5;
@@ -2886,6 +2888,7 @@ $("#html").hide();
                 let input5 = line5 + " > input";
 
                 $(line5).attr("id", id5);
+                $(line5).css("cursor", "auto");
 
                 line_mouse_events(line5);
 
