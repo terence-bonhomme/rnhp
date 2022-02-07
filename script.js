@@ -409,7 +409,9 @@ $("#html").hide();
 
     $("#video_play").css("top", player.height / 2 - 50 + "px");
     $("#video_play").css("left", player.width / 2 - 37.5 + "px");
+
     $("#bar_container").css("width", player.width - 25 + "px");
+    $("#bar_slid").css("width", player.width - 25 - 7.5 + "px");
   });
 
   // keyboard state
@@ -720,7 +722,7 @@ $("#html").hide();
       $("#bar_slid").css("visibility", "hidden");
     }
   });
-  
+
   $("#video_container").mouseleave(function (event) {
     $("#bar_slid").css("visibility", "hidden");
   });
