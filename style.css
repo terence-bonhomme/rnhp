@@ -35,6 +35,8 @@ li {
   margin-left: -10px;
   padding-top: 5px;
   list-style-position: outside;
+  user-select: none;
+  cursor: pointer;
 }
 
 input[type="button"] {
