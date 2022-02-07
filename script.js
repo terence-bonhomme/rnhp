@@ -85,8 +85,10 @@ $("#html").hide();
 
   var text_input = "";
   var writing_rem = false;
+
   var just_noted = false;
   var just_clicked = false;
+  var just_scrolled = false;
 
   var scroll_visible = false;
 
@@ -822,6 +824,12 @@ $("#html").hide();
       "shift+ArrowRight": "last line",
       "alt+ArrowLeft": "previous rem",
       "alt+ArrowRight": "next rem",
+      ArrowUp: "scroll top",
+      ArrowDown: "scroll bottom",
+      PageUp: "long scroll top",
+      PageDown: "long scroll bottom",
+      Home: "scroll begin",
+      End: "scroll end",
     };
 
     if (event.ctrlKey) shortcut += "ctrl+";
@@ -1083,11 +1091,63 @@ $("#html").hide();
 
           change_line(current_chapter);
           break;
-        case "previous rem":
-          event.preventDefault();
+        case "scroll top":
+          if (!just_scrolled) {
+            just_scrolled = true;
+            $(window).scrollTop($(window).scrollTop() - 16 * 2);
+            setTimeout(function () {
+              just_scrolled = false;
+            }, 100);
+          }
           break;
-        case "next rem":
+        case "scroll bottom":
+          if (!just_scrolled) {
+            just_scrolled = true;
+            $(window).scrollTop($(window).scrollTop() + 16 * 2);
+            setTimeout(function () {
+              just_scrolled = false;
+            }, 100);
+          }
+          break;
+        case "long scroll top":
           event.preventDefault();
+          if (!just_scrolled) {
+            just_scrolled = true;
+            $(window).scrollTop($(window).scrollTop() - 16 * 10);
+            setTimeout(function () {
+              just_scrolled = false;
+            }, 100);
+          }
+          break;
+        case "long scroll bottom":
+          event.preventDefault();
+          if (!just_scrolled) {
+            just_scrolled = true;
+            $(window).scrollTop($(window).scrollTop() + 16 * 10);
+            setTimeout(function () {
+              just_scrolled = false;
+            }, 100);
+          }
+          break;
+        case "scroll begin":
+          event.preventDefault();
+          if (!just_scrolled) {
+            just_scrolled = true;
+            $(window).scrollTop(0);
+            setTimeout(function () {
+              just_scrolled = false;
+            }, 100);
+          }
+          break;
+        case "scroll end":
+          event.preventDefault();
+          if (!just_scrolled) {
+            just_scrolled = true;
+            $(window).scrollTop(9999999);
+            setTimeout(function () {
+              just_scrolled = false;
+            }, 100);
+          }
           break;
         default:
       }
@@ -1847,7 +1907,6 @@ $("#html").hide();
 
     player.onplay = function () {
       paused = false;
-      cancel_auto_scroll = false;
     };
 
     player.onclick = function () {
@@ -1942,7 +2001,7 @@ $("#html").hide();
             player_current_time ==
             formatedTimeToDuration(document.getElementById(String(i)).value)
           ) {
-            if (!just_clicked || !cancel_auto_scroll) {
+            if (!just_clicked && !cancel_auto_scroll) {
               $("html, body").animate(
                 {
                   scrollTop: $("#" + i).offset().top,
