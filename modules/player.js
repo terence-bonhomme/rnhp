@@ -61,6 +61,7 @@ function hideVideoControl() {
   $("#video_control").css("visibility", "hidden");
   $("#bar_container").css("visibility", "hidden");
   $("#volume").css("visibility", "hidden");
+  $("#bar_slid").css("visibility", "hidden");
 
   $("#tooltip_time").css("opacity", 0);
   $("#video_player_thumb").css("opacity", 0);
