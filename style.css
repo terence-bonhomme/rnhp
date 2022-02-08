@@ -339,12 +339,16 @@ input.delay_placeholder::-webkit-input-placeholder {
   z-index: 3;
 }
 
-#bar_container {
+#bar_background {
   visibility: hidden;
   height: 5px;
   background: #a7abbd9e;
   visibility: hidden;
   opacity: 0;
+}
+
+#bar_container {
+  height: 20px;
 }
 
 #bar_duration {
@@ -355,6 +359,7 @@ input.delay_placeholder::-webkit-input-placeholder {
 }
 
 #bar_slid {
+  
   visibility: hidden;
   margin-left: 10px;
   margin-top: 0px;
@@ -383,7 +388,7 @@ input.delay_placeholder::-webkit-input-placeholder {
   background: #586cf4;
   position: absolute;
   margin-left: -12px;
-  margin-top: -13px;
+  margin-top: 0px;
   cursor: pointer;
   outline: none;
 }
