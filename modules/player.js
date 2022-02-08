@@ -59,7 +59,7 @@ function hideVideoControl() {
   $("#video_container").removeClass("video_radiant");
 
   $("#video_control").css("visibility", "hidden");
-  $("#bar_container").css("visibility", "hidden");
+  $("#bar_background").css("visibility", "hidden");
   $("#volume").css("visibility", "hidden");
   $("#bar_slid").css("visibility", "hidden");
 
@@ -73,14 +73,9 @@ function showVideoControl() {
   $("#video_container").addClass("video_radiant");
 
   $("#video_control").css("visibility", "visible");
-  $("#bar_container").css("visibility", "visible");
+  $("#bar_background").css("visibility", "visible");
   $("#volume").css("visibility", "visible");
-
-  const mouse_y =
-    (event.pageY - $("#video_container").offset().top) /
-    $("#video_container").height();
-  if (mouse_y >= 0.85 && mouse_y <= 0.92) {
-    $("#tooltip_time").css("opacity", 1);
+  
+      $("#tooltip_time").css("opacity", 1);
     $("#video_player_thumb").css("opacity", 1);
-  }
 }
