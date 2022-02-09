@@ -752,12 +752,14 @@ $("#html").hide();
     );
 
     setTimeout(function () {
-      $("html, body").animate(
-        {
-          scrollTop: $("#" + current_chapter).offset().top,
-        },
-        100
-      );
+      if (current_chapter != 0) {
+        $("html, body").animate(
+          {
+            scrollTop: $("#" + current_chapter).offset().top,
+          },
+          100
+        );
+      }
     }, 200);
   });
 
@@ -2073,12 +2075,14 @@ $("#html").hide();
       },
       stop: function (event, ui) {
         is_sliding_duration = false;
-        $("html, body").animate(
-          {
-            scrollTop: $("#" + current_chapter).offset().top,
-          },
-          100
-        );
+        if (current_chapter != 0) {
+          $("html, body").animate(
+            {
+              scrollTop: $("#" + current_chapter).offset().top,
+            },
+            100
+          );
+        }
       },
     });
 
@@ -3650,7 +3654,7 @@ $("#html").hide();
           $(this).tooltip("hide");
         });
         current_chapter = position;
-        
+
         $("html, body").animate(
           {
             scrollTop: $("#" + position).offset().top,
@@ -3707,7 +3711,7 @@ $("#html").hide();
         });
 
         current_chapter = position;
-        
+
         $("html, body").animate(
           {
             scrollTop: $("#" + position).offset().top,
@@ -3839,7 +3843,7 @@ $("#html").hide();
         });
 
         current_chapter = position;
-        
+
         just_clicked = true;
         $("html, body").animate(
           {
@@ -4134,7 +4138,7 @@ $("#html").hide();
     player.currentTime = formatedTimeToDuration(clock);
   }
 
-  async function click_line(line) {   
+  async function click_line(line) {
     const id_position = line.id;
 
     const chapter = parseInt(
@@ -4144,11 +4148,11 @@ $("#html").hide();
       current_chapter = chapter;
       previous_chapter = current_chapter;
 
-      if(!just_clicked){
-        await video_jump(chapter);  
-      }      
+      if (!just_clicked) {
+        await video_jump(chapter);
+      }
     }
-    
+
     just_clicked = true;
 
     level = 1;
