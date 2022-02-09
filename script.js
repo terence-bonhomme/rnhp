@@ -2285,6 +2285,7 @@ $("#html").hide();
       }
 
       $(input0).on("click", function () {
+        just_clicked = true;
         $("html, body").animate(
           {
             scrollTop: $(this).offset().top,
@@ -2344,6 +2345,7 @@ $("#html").hide();
               }
 
               $(input1).on("click", function () {
+                just_clicked = true;
                 $("html, body").animate(
                   {
                     scrollTop: $(this).offset().top,
@@ -2416,6 +2418,7 @@ $("#html").hide();
                   }
 
                   $(input2).on("click", function () {
+                    just_clicked = true;
                     $("html, body").animate(
                       {
                         scrollTop: $(this).offset().top,
@@ -2490,6 +2493,7 @@ $("#html").hide();
                       }
 
                       $(input3).on("click", function () {
+                        just_clicked = true;
                         $("html, body").animate(
                           {
                             scrollTop: $(this).offset().top,
@@ -2567,6 +2571,7 @@ $("#html").hide();
                           }
 
                           $(input4).on("click", function () {
+                            just_clicked = true;
                             $("html, body").animate(
                               {
                                 scrollTop: $(this).offset().top,
@@ -2651,6 +2656,7 @@ $("#html").hide();
                               }
 
                               $(input5).on("click", function () {
+                                just_clicked = true;
                                 $("html, body").animate(
                                   {
                                     scrollTop: $(this).offset().top,
@@ -2769,6 +2775,7 @@ $("#html").hide();
     input0.value = durationToFormatedTime(time);
 
     $(input0).on("click", function () {
+      just_clicked = true;
       $("html, body").animate(
         {
           scrollTop: $("#" + input0.id).offset().top,
@@ -2834,6 +2841,7 @@ $("#html").hide();
       });
 
       $(input0).on("click", function () {
+        just_clicked = true;
         $("html, body").animate(
           {
             scrollTop: $("#" + i).offset().top,
@@ -3080,6 +3088,7 @@ $("#html").hide();
       input1.value = durationToFormatedTime(time);
 
       $(input1).on("click", function () {
+        just_clicked = true;
         $("html, body").animate(
           {
             scrollTop: $(this).offset().top,
@@ -3641,6 +3650,7 @@ $("#html").hide();
           $(this).tooltip("hide");
         });
         current_chapter = position;
+        
         $("html, body").animate(
           {
             scrollTop: $("#" + position).offset().top,
@@ -3697,7 +3707,7 @@ $("#html").hide();
         });
 
         current_chapter = position;
-
+        
         $("html, body").animate(
           {
             scrollTop: $("#" + position).offset().top,
@@ -3761,6 +3771,7 @@ $("#html").hide();
         });
 
         current_chapter = position;
+        just_clicked = true;
         $("html, body").animate(
           {
             scrollTop: $("#" + position).offset().top,
@@ -3828,6 +3839,8 @@ $("#html").hide();
         });
 
         current_chapter = position;
+        
+        just_clicked = true;
         $("html, body").animate(
           {
             scrollTop: $("#" + position).offset().top,
@@ -4121,8 +4134,7 @@ $("#html").hide();
     player.currentTime = formatedTimeToDuration(clock);
   }
 
-  async function click_line(line) {
-    just_clicked = true;
+  async function click_line(line) {   
     const id_position = line.id;
 
     const chapter = parseInt(
@@ -4132,8 +4144,12 @@ $("#html").hide();
       current_chapter = chapter;
       previous_chapter = current_chapter;
 
-      await video_jump(chapter);
+      if(!just_clicked){
+        await video_jump(chapter);  
+      }      
     }
+    
+    just_clicked = true;
 
     level = 1;
     const match_level1 = id_position.match(/_1-[0-9]+/g);
