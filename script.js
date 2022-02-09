@@ -457,7 +457,6 @@ $("#html").hide();
 
   ok.onclick = async function () {
     url = linkInput.value;
-
     let new_video_url;
     if (url.includes("dropbox.com")) {
       video_url = url.replace("?dl=0", "?raw=1");
@@ -465,6 +464,8 @@ $("#html").hide();
       video_url = url;
     } else if (url.includes("onedrive.live.com")) {
       url = url.substring(13, 119).replace("embed", "download");
+    } else if (url.includes("box.com")) {
+      video_url = url;
     } else if (
       url.match(
         /\.mp4|\.mp3|\.webm|\.ogg|\.wav|\.mov|\.flac|\.weba|\.oga|\.m4a/i
@@ -1830,14 +1831,23 @@ $("#html").hide();
     player_thumb.height = 100;
 
     var video_source = document.getElementsByClassName("video_source");
-    //let video_url = "";
+
     for (var i = 0; i < video_source.length; i++) {
-      if (url.includes("dropbox.com"))
+      if (url.includes("dropbox.com")) {
         video_url = url.replace("?dl=0", "?raw=1");
-      if (url.includes("google.com"))
+      } else if (url.includes("box.com")) {
+        let shared_name = url.substring(40);
+        let file_id = url.substring(25, 37);
+        video_url =
+          "https://app.box.com/index.php?rm=box_download_shared_file&shared_name=" +
+          shared_name +
+          "&file_id=f_" +
+          file_id;
+      } else if (url.includes("google.com")) {
         video_url =
           "https://docs.google.com/uc?export=download&id=" +
           url.substring(32, 65);
+      }
 
       video_source[i].src = video_url;
     }
@@ -2050,8 +2060,6 @@ $("#html").hide();
       }
     }
 
-    // create the volume slider
-
     $("#bar_slid").slider({
       orientation: "horizontal",
       min: 0,
@@ -2070,8 +2078,6 @@ $("#html").hide();
 
         updateTooltipTime(mouse_x);
         updateThumbnail(mouse_x);
-
-        // display
       },
       stop: function (event, ui) {
         is_sliding_duration = false;
