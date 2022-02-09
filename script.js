@@ -2083,6 +2083,11 @@ $("#html").hide();
             100
           );
         }
+
+        setTimeout(function () {
+          $("#tooltip_time").css("visibility", "hidden");
+          $("#video_player_thumb").css("visibility", "hidden");
+        }, 200);
       },
     });
 
