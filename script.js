@@ -1074,6 +1074,7 @@ $("#html").hide();
           change_line(current_chapter);
           break;
         case "scroll top":
+          event.preventDefault();
           if (!just_scrolled) {
             just_scrolled = true;
             $(window).scrollTop($(window).scrollTop() - 16 * 2);
@@ -1083,6 +1084,7 @@ $("#html").hide();
           }
           break;
         case "scroll bottom":
+          event.preventDefault();
           if (!just_scrolled) {
             just_scrolled = true;
             $(window).scrollTop($(window).scrollTop() + 16 * 2);
