@@ -3072,6 +3072,8 @@ $("#html").hide();
         break;
     }
 
+    if (last_level == 5) $(li1).css("cursor", "auto");
+
     line_mouse_events(li1);
 
     // ctrl + enter only
