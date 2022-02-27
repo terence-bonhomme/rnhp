@@ -85,21 +85,19 @@
           <div id="video_play"></div>
           <!-- player -->
           <div id="video_container" class="video_radiant">
-            <video id="video_player" preload="auto">    
+            <video id="video_player" preload="auto">
               <source class="video_source" type="video/webm" />
               <source class="video_source" type="video/mp4" />
               <!--Your browser does not support this video file.-->
             </video>
             <div id="video_control" class="">
-              <div id="bar_container">                           
+              <div id="bar_container">
                 <div id="bar_slid"></div>
-                <div id="bar_space" style="height: 15px;">
+                <div id="bar_space" style="height: 15px"></div>
+                <div id="bar_background" class="progress">
+                  <div id="bar_duration"></div>
                 </div>
-              <div id="bar_background" class="progress">
-                <div id="bar_duration"></div>
-                
               </div>
-                </div>
               <div class="row">
                 <div
                   id="bar_play_pause"
@@ -598,6 +596,22 @@
                     <tr>
                       <td><span class="key">K</span></td>
                       <td>play/pause</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="key">Shift</span>+<span class="key"
+                          >,</span
+                        >
+                      </td>
+                      <td>slower</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="key">Shift</span>+<span class="key"
+                          >.</span
+                        >
+                      </td>
+                      <td>faster</td>
                     </tr>
                   </table>
                 </div>
