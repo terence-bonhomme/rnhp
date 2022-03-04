@@ -98,41 +98,63 @@
                   <div id="bar_duration"></div>
                 </div>
               </div>
-              <div class="row">
+              <div class="row" id="video_board">
                 <div
                   id="bar_play_pause"
-                  class="d-flex justify-content-center col-1 mt-3"
+                  class="d-flex justify-content-center col-1 mt-2"
                 >
                   <img
                     id="play_icon"
                     class="video_button"
-                    src="https://cdn.glitch.global/15b76133-8879-4c77-80a5-6a76b9ed3d57/play-svgrepo-com_white.svg?v=1643823239197"
-                    height="18px"
-                    width="18px"
+                    src="https://cdn.glitch.global/15b76133-8879-4c77-80a5-6a76b9ed3d57/play-svgrepo-com-gray.svg?v=1646077475496"
+                    height="30px"
+                    width="30px"
                   />
                 </div>
                 <div
                   id="bar_sound_mute"
-                  class="d-flex justify-content-center col-1 mt-3"
+                  class="d-flex justify-content-center col-1 mt-2 d-none d-md-block"
                 >
                   <img
                     id="sound_icon"
                     class="video_button"
-                    src="https://cdn.glitch.global/15b76133-8879-4c77-80a5-6a76b9ed3d57/sound-1-svgrepo-com-white.svg?v=1643835522758"
-                    height="18px"
-                    width="18px"
+                    src="https://cdn.glitch.global/15b76133-8879-4c77-80a5-6a76b9ed3d57/sound-high-svgrepo-com-transparent-gray.svg?v=1646077506590"
+                    height="30px"
+                    width="30px"
                   />
                 </div>
-                <div class="col-2 d-flex justify-content-center">
+                <div id="volume_mode" class="col-1 d-flex d-none">
                   <div id="volume" class=""></div>
                 </div>
-                <div id="bar_time" class="col-3 d-none d-lg-block"></div>
-                <div id="small_bar_time" class="col-3 d-lg-none"></div>
-                <div id="bar_chapter" class="col-5 d-none d-sm-block"></div>
+                <div id="slow_mode" class="d-flex justify-content-center col-1">
+                  <img
+                    id="slow_icon"
+                    class="video_button"
+                    src="https://cdn.glitch.global/15b76133-8879-4c77-80a5-6a76b9ed3d57/slow-mode-svgrepo-com-gray.svg?v=1646077462286"
+                    height="30px"
+                    width="30px"
+                  />
+                </div>
+                <div id="fast_mode" class="d-flex justify-content-center col-1">
+                  <img
+                    id="fast_icon"
+                    class="video_button"
+                    src="https://cdn.glitch.global/15b76133-8879-4c77-80a5-6a76b9ed3d57/fast-mode-svgrepo-com-gray.svg?v=1646077441372"
+                    height="30px"
+                    width="30px"
+                  />
+                </div>
+                <div id="bar_time" class="d-none d-lg-block"></div>
+                <div id="small_bar_time" class="d-lg-none"></div>
+                <div id="bar_chapter" class="d-none d-sm-block"></div>
               </div>
             </div>
 
             <div id="tooltip_time"></div>
+
+            <div id="overlay_container">
+              <div id="overlay_content"></div>
+            </div>
 
             <video id="video_player_thumb" preload="auto">
               <source class="video_source" type="video/webm" />
@@ -158,14 +180,14 @@
                   src="https://cdn.glitch.me/cc7980bc-6980-45da-a79b-3fbfdb89c67b%2Fedit-note-svgrepo-com.svg?v=1636316606765"
                   height="15px"
                   width="15px"
-                  class="me-2 mt-1 d-none d-md-block"
+                  class="note_button me-2 mt-1 d-none d-md-block"
                 />
 
                 <img
                   src="https://cdn.glitch.me/cc7980bc-6980-45da-a79b-3fbfdb89c67b%2Fedit-note-svgrepo-com.svg?v=1636316606765"
                   height="18px"
                   width="18px"
-                  class="mt-1 d-md-none"
+                  class="note_button mt-1 d-md-none"
                 />
                 <div class="d-none d-md-block">Take Note</div>
               </div>
@@ -182,7 +204,7 @@
                   src="https://cdn.glitch.me/cc7980bc-6980-45da-a79b-3fbfdb89c67b%2Ftime-hand-drawn-interface-symbol-svgrepo-com.svg?v=1636318980817"
                   height="18px"
                   width="18px"
-                  class="me-2 mt-2 d-md-block"
+                  class="note_button me-2 mt-2 d-md-block"
                 />
                 <input
                   id="delayInput"
@@ -221,13 +243,13 @@
                   src="https://cdn.glitch.me/cc7980bc-6980-45da-a79b-3fbfdb89c67b%2Fnotepad-refresh-svgrepo-com.svg?v=1636318031101"
                   height="18px"
                   width="18px"
-                  class="me-2 mt-1 d-none d-md-block"
+                  class="note_button me-2 mt-1 d-none d-md-block"
                 />
                 <img
                   src="https://cdn.glitch.me/cc7980bc-6980-45da-a79b-3fbfdb89c67b%2Fnotepad-refresh-svgrepo-com.svg?v=1636318031101"
                   height="20px"
                   width="20px"
-                  class="mt-1 d-md-none"
+                  class="note_button mt-1 d-md-none"
                 />
                 <div class="d-none d-md-block">Refresh</div>
               </div>
@@ -244,7 +266,7 @@
                   src="https://cdn.glitch.me/be28f3c3-fd03-4a8f-b93a-e1fdc84bea7d/keyboard-svgrepo-com.svg?v=1640533839007"
                   height="15px"
                   width="15px"
-                  class="me-2 mt-1 d-none d-md-block"
+                  class="note_button me-2 mt-1 d-none d-md-block"
                 />
                 <div class="d-none d-md-block">Shortcuts</div>
               </div>
