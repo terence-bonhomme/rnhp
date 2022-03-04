@@ -1909,6 +1909,10 @@ $("#html").hide();
       paused = false;
     };
 
+    player.onended = function () {
+      updatePlayPauseIcon();
+    };
+
     player.onclick = function () {
       if (player.paused) {
         player.play();
