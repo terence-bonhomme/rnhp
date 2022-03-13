@@ -1316,7 +1316,10 @@ $("#html").hide();
         player.currentTime = Math.floor(player.currentTime);
         let time = player.currentTime;
 
-        var text = durationToFormatedTime(time) + " " + noteInput.value;
+        var text =
+          durationToFormatedTime(time) +
+          " " +
+          updateLatexInline(noteInput.value);
 
         text_input = noteInput.value;
 
@@ -1398,9 +1401,10 @@ $("#html").hide();
         let chapter_note = current_chapter;
 
         if (rem_tree.length > 1) rewind();
-
         player.currentTime = Math.floor(player.currentTime);
         let time = player.currentTime;
+
+        var text = updateLatexInline(noteInput.value);
 
         let text_input = noteInput.value;
 
@@ -1551,7 +1555,7 @@ $("#html").hide();
             break;
         }
 
-        const last_rem = await RemNoteAPI.v0.create(text_input, parentId);
+        const last_rem = await RemNoteAPI.v0.create(text, parentId);
 
         switch (level) {
           case 1:
@@ -1627,7 +1631,10 @@ $("#html").hide();
         player.currentTime = Math.floor(player.currentTime);
         let time = player.currentTime;
 
-        var text = durationToFormatedTime(time) + " " + noteInput.value;
+        var text =
+          durationToFormatedTime(time) +
+          " " +
+          updateLatexInline(noteInput.value);
 
         text_input = noteInput.value;
 
@@ -2040,10 +2047,10 @@ $("#html").hide();
           $("#small_bar_time").addClass("col-3");
           $("#bar_chapter").addClass("col-5");
         }
-        
+
         showVideoControl();
 
-        $("#video_play").css("visibility", "visible");   
+        $("#video_play").css("visibility", "visible");
         $("#bar_time, #small_bar_time, #bar_chapter").css("opacity", 1);
 
         video_ready = true;
@@ -2435,11 +2442,9 @@ $("#html").hide();
         $(this).css("background", color_0[(i - 1) % color_0.length]);
       });
 
-      // text
-      li0.appendChild(input0);
-      var newContent0 = document.createTextNode(
-        rem.name[0].split(" ").slice(1).join(" ")
-      );
+      if (hasTimestamp(rem)) li0.appendChild(input0);
+
+      const newContent0 = createNewContent(rem);
 
       li0.appendChild(newContent0);
 
@@ -2460,7 +2465,7 @@ $("#html").hide();
             const child1_rem = child0_rem.children[n1];
 
             let input1;
-            if (child1_rem.name[0].match(/(\d+:\d+:\d+)|(\d+:\d+)/) != null) {
+            if (hasTimestamp(child1_rem)) {
               input1 = document.createElement("input");
               input1.type = "button";
 
@@ -2496,24 +2501,9 @@ $("#html").hide();
               });
             }
 
-            let text_array = child1_rem.name[0].split(" ");
-            text_array.shift();
+            if (hasTimestamp(child1_rem)) li1.appendChild(input1);
 
-            const child1 = child1_rem.name[0].split(" ");
-            //if (child1_rem.name[0].split(" ").length >= 1) {
-            if (child1.length >= 1) {
-              if (child1[1] != undefined) {
-                if (
-                  child1_rem.name[0].match(/(\d+:\d+:\d+)|(\d+:\d+)/) != null
-                ) {
-                  li1.appendChild(input1);
-                }
-
-                var newContent1 = document.createTextNode(
-                  child1.slice(1).join(" ")
-                );
-              }
-            }
+            const newContent1 = createNewContent(child1_rem);
 
             li1.appendChild(newContent1);
             ul1.appendChild(li1);
@@ -2531,9 +2521,7 @@ $("#html").hide();
                 const child2_rem = child1_rem.children[n2];
 
                 let input2;
-                if (
-                  child2_rem.name[0].match(/(\d+:\d+:\d+)|(\d+:\d+)/) != null
-                ) {
+                if (hasTimestamp(child2_rem)) {
                   input2 = document.createElement("input");
                   input2.type = "button";
 
@@ -2572,21 +2560,9 @@ $("#html").hide();
                   });
                 }
 
-                const child2 = child2_rem.name[0].split(" ");
-                if (child2.length >= 1) {
-                  if (child2[1] != undefined) {
-                    if (
-                      child2_rem.name[0].match(/(\d+:\d+:\d+)|(\d+:\d+)/) !=
-                      null
-                    ) {
-                      li2.appendChild(input2);
-                    }
+                if (hasTimestamp(child2_rem)) li2.appendChild(input2);
 
-                    var newContent2 = document.createTextNode(
-                      "" + child2.slice(1).join(" ")
-                    );
-                  }
-                }
+                const newContent2 = createNewContent(child2_rem);
 
                 li2.appendChild(newContent2);
                 ul2.appendChild(li2);
@@ -2604,10 +2580,7 @@ $("#html").hide();
                     const child3_rem = child2_rem.children[n3];
 
                     let input3;
-                    if (
-                      child3_rem.name[0].match(/(\d+:\d+:\d+)|(\d+:\d+)/) !=
-                      null
-                    ) {
+                    if (hasTimestamp(child3_rem)) {
                       input3 = document.createElement("input");
                       input3.type = "button";
 
@@ -2647,24 +2620,9 @@ $("#html").hide();
                       });
                     }
 
-                    let text_array = child3_rem.name[0].split(" ");
-                    text_array.shift();
+                    if (hasTimestamp(child3_rem)) li3.appendChild(input3);
 
-                    const child3 = child3_rem.name[0].split(" ");
-                    if (child3.length >= 1) {
-                      if (child3[1] != undefined) {
-                        if (
-                          child3_rem.name[0].match(/(\d+:\d+:\d+)|(\d+:\d+)/) !=
-                          null
-                        ) {
-                          li3.appendChild(input3);
-                        }
-
-                        var newContent3 = document.createTextNode(
-                          "" + child3.slice(1).join(" ")
-                        );
-                      }
-                    }
+                    const newContent3 = createNewContent(child3_rem);
 
                     li3.appendChild(newContent3);
                     ul3.appendChild(li3);
@@ -2682,10 +2640,7 @@ $("#html").hide();
                         const child4_rem = child3_rem.children[n4];
 
                         let input4;
-                        if (
-                          child4_rem.name[0].match(/(\d+:\d+:\d+)|(\d+:\d+)/) !=
-                          null
-                        ) {
+                        if (hasTimestamp(child4_rem)) {
                           input4 = document.createElement("input");
                           input4.type = "button";
 
@@ -2725,25 +2680,10 @@ $("#html").hide();
                           });
                         }
 
-                        let text_array = child4_rem.name[0].split(" ");
-                        text_array.shift();
+                        if (hasTimestamp(child4_rem)) li4.appendChild(input4);
 
-                        const child4 = child4_rem.name[0].split(" ");
-                        if (child4.length >= 1) {
-                          if (child4[1] != undefined) {
-                            if (
-                              child4_rem.name[0].match(
-                                /(\d+:\d+:\d+)|(\d+:\d+)/
-                              ) != null
-                            ) {
-                              li4.appendChild(input4);
-                            }
+                        const newContent4 = createNewContent(child4_rem);
 
-                            var newContent4 = document.createTextNode(
-                              "" + child4.slice(1).join(" ")
-                            );
-                          }
-                        }
                         li4.appendChild(newContent4);
                         ul4.appendChild(li4);
 
@@ -2766,11 +2706,7 @@ $("#html").hide();
                             const child5_rem = child4_rem.children[n5];
 
                             let input5;
-                            if (
-                              child5_rem.name[0].match(
-                                /(\d+:\d+:\d+)|(\d+:\d+)/
-                              ) != null
-                            ) {
+                            if (hasTimestamp(child5_rem)) {
                               input5 = document.createElement("input");
                               input5.type = "button";
 
@@ -2811,25 +2747,10 @@ $("#html").hide();
                               });
                             }
 
-                            let text_array = child5_rem.name[0].split(" ");
-                            text_array.shift();
+                            if (hasTimestamp(child5_rem))
+                              li5.appendChild(input5);
 
-                            const child5 = child5_rem.name[0].split(" ");
-                            if (child5.length >= 1) {
-                              if (child5[1] != undefined) {
-                                if (
-                                  child5_rem.name[0].match(
-                                    /(\d+:\d+:\d+)|(\d+:\d+)/
-                                  ) != null
-                                ) {
-                                  li5.appendChild(input5);
-                                }
-
-                                var newContent5 = document.createTextNode(
-                                  "" + child5.slice(1).join(" ")
-                                );
-                              }
-                            }
+                            const newContent5 = createNewContent(child5_rem);
 
                             li5.appendChild(newContent5);
                             ul5.appendChild(li5);
@@ -2867,6 +2788,9 @@ $("#html").hide();
       $("li").css("color", "#c0bdbd");
       change_line(current_chapter);
     }
+
+    // LaTeX
+    renderLatex();
   }
 
   async function update_timeline(position, time, text) {
@@ -3119,6 +3043,9 @@ $("#html").hide();
       $("li").css("color", "#c0bdbd");
       change_line(current_chapter);
     }
+
+    // LaTeX
+    renderLatex();
   }
 
   function update_note_child(chapterId, tree_position, time, text) {
@@ -3297,6 +3224,9 @@ $("#html").hide();
       $("li").css("color", "#c0bdbd");
       change_line(current_chapter);
     }
+
+    // LaTeX
+    renderLatex();
   }
 
   function select_node(chapterId, after) {
@@ -4391,5 +4321,50 @@ $("#html").hide();
       player_thumb.currentTime = Math.floor(x * player.duration);
       last_time_player_thumb = player_thumb.currentTime;
     }
+  }
+
+  // LaTeX
+
+  function renderLatex() {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "$$", right: "$$", display: false }],
+      throwOnError: false,
+    });
+  }
+
+  function chainRemName(rem) {
+    let text = "";
+    if (hasTimestamp(rem)) text += removeTimestamp(rem);
+
+    for (let i = hasTimestamp(rem) ? 1 : 0; i < rem.name.length; i++) {
+      if (rem.name[i].text != undefined) {
+        text += "$$" + rem.name[i].text + "$$";
+      } else {
+        text += rem.name[i];
+      }
+    }
+    return text;
+  }
+
+  function updateLatexInline(note) {
+    if (note.match(/\$\$.*\$\$/g) != null) note = note.replaceAll("$$", "$");
+    return note;
+  }
+
+  // note
+
+  function createNewContent(rem) {
+    return document.createTextNode(chainRemName(rem));
+  }
+
+  function hasTimestamp(rem) {
+    return (
+      typeof rem.name[0] == "string" &&
+      rem.name[0].match(/^(\d+:\d+:\d+)|(\d+:\d+)/) != null
+    );
+  }
+
+  function removeTimestamp(rem) {
+    return rem.name[0].split(" ").slice(1).join(" ");
   }
 })();
