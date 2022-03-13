@@ -143,6 +143,18 @@ input.delay_placeholder::-webkit-input-placeholder {
   cursor: pointer;
 }
 
+.katex-display > .katex {
+  white-space: normal;
+}
+
+.katex-display > .base {
+  margin: 0.25em 0;
+}
+
+.katex-display {
+  margin: 0.5em 0;
+}
+
 #viewCont {
   display: none;
 }
